@@ -1,0 +1,130 @@
+[gd_scene format=3 uid="uid://b4l43hx1sc3ky"]
+
+[ext_resource type="Script" uid="uid://d1pchw1cg7yl7" path="res://test_mini_jeu.gd" id="1_yyb02"]
+[ext_resource type="PackedScene" uid="uid://bjn6qrygkcpe6" path="res://kurukuru.tscn" id="2_b1gvo"]
+[ext_resource type="Texture2D" uid="uid://4b8cbb6ky6ix" path="res://assets/timer_placeholder.png" id="3_b1gvo"]
+
+[sub_resource type="Animation" id="Animation_b1gvo"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("..:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_4l3sm"]
+resource_name = "main"
+length = 4.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("..:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 1), Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1.3, 2.3),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [0, 1, 2]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 3.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/3/type = "method"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("..")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.3, 3.3),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [],
+"method": &"debut"
+}, {
+"args": [],
+"method": &"fin"
+}]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_2leov"]
+_data = {
+&"RESET": SubResource("Animation_b1gvo"),
+&"main": SubResource("Animation_4l3sm")
+}
+
+[node name="test_mini_jeu" type="CanvasModulate" unique_id=819812425]
+script = ExtResource("1_yyb02")
+scene_a_tester = ExtResource("2_b1gvo")
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="." unique_id=985061330]
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="SubViewport" type="SubViewport" parent="SubViewportContainer" unique_id=443128119]
+handle_input_locally = false
+size = Vector2i(1280, 960)
+render_target_update_mode = 4
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=72614837]
+position = Vector2(640, 810)
+texture = ExtResource("3_b1gvo")
+hframes = 3
+frame = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1049940987]
+root_node = NodePath("../Sprite2D")
+libraries/ = SubResource("AnimationLibrary_2leov")

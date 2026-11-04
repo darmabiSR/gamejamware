@@ -1,0 +1,122 @@
+[gd_scene format=3 uid="uid://dknw78n3yfmqh"]
+
+[ext_resource type="Script" uid="uid://ct4ua21lfpo7j" path="res://golf.gd" id="1_pssgv"]
+[ext_resource type="Texture2D" uid="uid://bom07mfuvejy6" path="res://assets/golf.png" id="1_sqidu"]
+[ext_resource type="Texture2D" uid="uid://beb8pytnq57gi" path="res://assets/troutrou.png" id="2_x1r1u"]
+[ext_resource type="Texture2D" uid="uid://bfwmfv26rg614" path="res://assets/trou.png" id="3_f80a1"]
+[ext_resource type="Texture2D" uid="uid://bcodcq6j07v05" path="res://assets/balle_golf.png" id="4_f80a1"]
+[ext_resource type="Texture2D" uid="uid://c4y5mp54fntec" path="res://assets/visee.png" id="6_a81u8"]
+[ext_resource type="AudioStream" uid="uid://cee81j337lbv3" path="res://assets/sounds/Wii Sports - Golf Crowd Sound Effects.mp3" id="7_vfpqe"]
+[ext_resource type="AudioStream" uid="uid://dylmp7q0u7j2p" path="res://assets/sounds/golf_swing.wav" id="8_vysxl"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pssgv"]
+atlas = ExtResource("3_f80a1")
+region = Rect2(0, 0, 200, 400)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_a81u8"]
+atlas = ExtResource("3_f80a1")
+region = Rect2(200, 0, 200, 400)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vfpqe"]
+atlas = ExtResource("3_f80a1")
+region = Rect2(400, 0, 200, 400)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vysxl"]
+atlas = ExtResource("3_f80a1")
+region = Rect2(600, 0, 200, 400)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_v2125"]
+atlas = ExtResource("3_f80a1")
+region = Rect2(800, 0, 200, 400)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_a5oyg"]
+atlas = ExtResource("3_f80a1")
+region = Rect2(1000, 0, 200, 400)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_3o6qr"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pssgv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_a81u8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vfpqe")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vysxl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_v2125")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_a5oyg")
+}],
+"loop": 1,
+"name": &"default",
+"speed": 10.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_lbvel"]
+radius = 29.0
+height = 160.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_lbvel"]
+radius = 7.615773
+
+[node name="golf" type="Node" unique_id=750180690]
+script = ExtResource("1_pssgv")
+
+[node name="racine" type="Node2D" parent="." unique_id=1971870469]
+texture_filter = 2
+
+[node name="TextureRect" type="TextureRect" parent="racine" unique_id=855930651]
+offset_left = -555.0
+offset_top = -971.0
+offset_right = 1791.0
+offset_bottom = 969.0
+texture = ExtResource("1_sqidu")
+
+[node name="trou" type="Area2D" parent="racine" unique_id=242755290]
+texture_filter = 2
+
+[node name="Sprite2D" type="Sprite2D" parent="racine/trou" unique_id=952408606]
+position = Vector2(3, -159)
+texture = ExtResource("2_x1r1u")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="racine/trou/Sprite2D" unique_id=305034489]
+z_index = 1
+sprite_frames = SubResource("SpriteFrames_3o6qr")
+frame_progress = 0.817566
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="racine/trou" unique_id=806887855]
+rotation = 1.5707964
+shape = SubResource("CapsuleShape2D_lbvel")
+
+[node name="balle" type="CharacterBody2D" parent="racine" unique_id=1339205521]
+texture_filter = 2
+position = Vector2(640, 560)
+
+[node name="Sprite2D" type="Sprite2D" parent="racine/balle" unique_id=356130984]
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("4_f80a1")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="racine/balle" unique_id=486713159]
+shape = SubResource("CircleShape2D_lbvel")
+
+[node name="visee" type="Node2D" parent="racine/balle" unique_id=753548248]
+
+[node name="Sprite2D2" type="Sprite2D" parent="racine/balle/visee" unique_id=1127158133]
+position = Vector2(557, 0)
+scale = Vector2(2, 2)
+texture = ExtResource("6_a81u8")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1009983745]
+stream = ExtResource("7_vfpqe")
+
+[node name="AudioStreamPlayer2" type="AudioStreamPlayer" parent="." unique_id=1553052538]
+stream = ExtResource("8_vysxl")
+
+[connection signal="body_entered" from="racine/trou" to="." method="_on_trou_body_entered"]

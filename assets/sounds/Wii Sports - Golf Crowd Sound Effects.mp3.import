@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://cee81j337lbv3"
+path="res://.godot/imported/Wii Sports - Golf Crowd Sound Effects.mp3-a415a34b1c37bff3b8ec768184126a3b.mp3str"
+
+[deps]
+
+source_file="res://assets/sounds/Wii Sports - Golf Crowd Sound Effects.mp3"
+dest_files=["res://.godot/imported/Wii Sports - Golf Crowd Sound Effects.mp3-a415a34b1c37bff3b8ec768184126a3b.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

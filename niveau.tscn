@@ -1,0 +1,105 @@
+[gd_scene format=3 uid="uid://i5irmu1aamo8"]
+
+[ext_resource type="Script" uid="uid://bhh7f7ko316ry" path="res://main.gd" id="1_48mvn"]
+[ext_resource type="Script" uid="uid://bg73viu04cgf8" path="res://scenes.gd" id="2_biv77"]
+[ext_resource type="Texture2D" uid="uid://4b8cbb6ky6ix" path="res://assets/timer_placeholder.png" id="3_1eifx"]
+
+[sub_resource type="Animation" id="Animation_b1gvo"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_4l3sm"]
+resource_name = "main"
+length = 4.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1, 2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [0, 1, 2]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("..")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 3),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [],
+"method": &"debut"
+}, {
+"args": [],
+"method": &"fin_minijeu"
+}]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_nba45"]
+_data = {
+&"RESET": SubResource("Animation_b1gvo"),
+&"main": SubResource("Animation_4l3sm")
+}
+
+[node name="niveau" type="Node2D" unique_id=691942225]
+texture_filter = 2
+script = ExtResource("1_48mvn")
+
+[node name="scenes" type="SubViewportContainer" parent="." unique_id=143785535]
+script = ExtResource("2_biv77")
+
+[node name="minijeu" type="SubViewport" parent="scenes" unique_id=889236493]
+handle_input_locally = false
+size = Vector2i(1280, 960)
+render_target_update_mode = 4
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1652712624]
+position = Vector2(640, 810)
+texture = ExtResource("3_1eifx")
+hframes = 3
+frame = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1877564614]
+root_node = NodePath("../Sprite2D")
+libraries/ = SubResource("AnimationLibrary_nba45")

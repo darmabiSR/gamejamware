@@ -1,0 +1,24 @@
+[gd_scene format=3 uid="uid://cck5lut72i0hu"]
+
+[ext_resource type="Script" uid="uid://b74o8mwyinc5i" path="res://title.gd" id="1_oyqm6"]
+
+[node name="Title" type="Node2D" unique_id=1384271364]
+script = ExtResource("1_oyqm6")
+
+[node name="Label" type="Label" parent="." unique_id=2022701338]
+offset_left = 274.0
+offset_top = 49.0
+offset_right = 908.0
+offset_bottom = 181.0
+theme_override_font_sizes/font_size = 96
+text = "7fault ware"
+
+[node name="Button" type="Button" parent="." unique_id=1938266672]
+offset_left = 470.0
+offset_top = 258.0
+offset_right = 699.0
+offset_bottom = 333.0
+theme_override_font_sizes/font_size = 48
+text = "demarrer"
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

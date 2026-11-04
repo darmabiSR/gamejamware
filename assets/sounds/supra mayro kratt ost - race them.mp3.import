@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://7lcryw66dna3"
+path="res://.godot/imported/supra mayro kratt ost - race them.mp3-34738db68441d9750e14cade8753f16f.mp3str"
+
+[deps]
+
+source_file="res://assets/sounds/supra mayro kratt ost - race them.mp3"
+dest_files=["res://.godot/imported/supra mayro kratt ost - race them.mp3-34738db68441d9750e14cade8753f16f.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4
