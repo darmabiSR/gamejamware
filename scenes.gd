@@ -1,7 +1,6 @@
 extends SubViewportContainer
 
 var scenes : Array[PackedScene]
-@onready var texte = $"../transition/Label"
 @onready var main = $".."
 @onready var vue = $minijeu
 var NB_SCENE
@@ -32,20 +31,17 @@ func choisir_nouvelle_scene():
 	#demmarrage du nouveau mini jeu
 	current = scenes[numero_scene].instantiate()
 	vue.add_child(current)
-	texte.text = current.get_phrase()
+	current.process_mode = Node.PROCESS_MODE_WHEN_PAUSED
+	main.texte_annonce.text = current.get_phrase()
 	current.est_joueur_1 = joueur
-		
+
 func lancement():
 	current.en_cours = true
-	$"../AnimationPlayer".play("main")
+	current.process_mode = Node.PROCESS_MODE_INHERIT
+	$"../AnimatedSprite2D".play("timer")
 
-func son_victoire_defaite():
-	if current != null:
-		if !current.gagne:
-			$"../transition/SoundLose".play(0.0)
-			$"../transition/ColorRect".visible = true
-		else:
-			$"../transition/SoundWin".play(0.0)
-			$"../transition/ColorRect".visible = false
-			$"../transition/WinConfettiLeft".emitting = true
-			$"../transition/WinConfettiright".emitting = true
+
+func _on_animated_sprite_2d_animation_finished() -> void:
+	$"../AnimatedSprite2D".play("explosion")
+	current.en_cours = false
+	main.fin_minijeu()
